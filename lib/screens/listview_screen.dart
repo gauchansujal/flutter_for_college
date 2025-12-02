@@ -12,10 +12,11 @@ class _ListViewScreenState extends State<ListViewScreen> {
   final _formKey = GlobalKey<FormState>();
   final _fnameController = TextEditingController();
   final _lnameController = TextEditingController();
+
   String? _selectedCity;
 
+  // To display list of cities in dropdown
   final List<DropdownMenuItem<String>> _cities = [
-    // Dropdown items
     DropdownMenuItem(value: "Chitwan", child: Text("Chitwan")),
     DropdownMenuItem(value: "Kathmandu", child: Text("Kathmandu")),
     DropdownMenuItem(value: "Pokhara", child: Text("Pokhara")),
