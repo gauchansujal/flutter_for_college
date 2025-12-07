@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_for_college/models/student_model.dart';
 import 'output_screen.dart';
 
 class ListViewScreen extends StatefulWidget {
@@ -14,6 +15,8 @@ class _ListViewScreenState extends State<ListViewScreen> {
   final _lnameController = TextEditingController();
 
   String? _selectedCity;
+
+  final List<StudentModel> _lstStudents = [];
 
   // To display list of cities in dropdown
   final List<DropdownMenuItem<String>> _cities = [
@@ -113,6 +116,15 @@ class _ListViewScreenState extends State<ListViewScreen> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           //Add student code goes here
+                          StudentModel student = StudentModel(
+                            fname: _fnameController.text,
+                            lname: _lnameController.text,
+                            city: _selectedCity!,
+                          );
+                          //student model
+                          setState(() {
+                            _lstStudents.add(student);
+                          });
                         }
                       },
                       icon: const Icon(Icons.add),
@@ -153,11 +165,68 @@ class _ListViewScreenState extends State<ListViewScreen> {
                 ],
               ),
               const SizedBox(height: 40),
-              Text(
-                "No Data",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 24, color: Colors.grey.shade400),
-              ),
+              // Text(
+              //   "No Data",
+              //   textAlign: TextAlign.center,
+              //   style: TextStyle(fontSize: 24, color: Colors.grey.shade400),
+              // ),
+              if (_lstStudents.isEmpty)
+                const Center(
+                  child: Text(
+                    'No students found',
+                    style: TextStyle(fontSize: 18, color: Colors.grey),
+                  ),
+                )
+              else ...[
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: _lstStudents.length,
+                  itemBuilder: (context, index) {
+                    final student = _lstStudents[index];
+                    return Card(
+                      margin: const EdgeInsets.symmetric(vertical: 8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 4,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.blue.shade100,
+                          child: Text(
+                            student.fname[0].toUpperCase(),
+                            style: const TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        title: Text('${student.fname} ${student.lname}'),
+                        subtitle: Text(student.city),
+                        trailing: Wrap(
+                          spacing: 12,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.edit, color: Colors.green),
+                              onPressed: () {
+                                // Edit functionality here
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.delete, color: Colors.red),
+                              onPressed: () {
+                                setState(() {
+                                  _lstStudents.removeAt(index);
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ],
           ),
         ),
