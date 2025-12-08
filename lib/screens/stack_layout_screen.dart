@@ -10,8 +10,37 @@ class StackLayoutScreen extends StatelessWidget {
         title: const Text('Stack Layout'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      body: const Center(
-        child: Text('stack layout', style: TextStyle(fontSize: 24)),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Container(
+              height: 400,
+              width: double.infinity,
+              color: Colors.amber,
+              child: const Text("I am first container"),
+            ),
+            Positioned(
+              top: 1,
+              right: 1,
+              child: Container(
+                height: 100,
+                width: 100,
+                color: Colors.green,
+                child: const Text('i am second container'),
+              ),
+            ),
+            Positioned(
+              bottom: -20,
+              right: 400 / 2 - 50,
+              child: Container(
+                height: 100,
+                width: 100,
+                color: Colors.red,
+                child: const Text('I am third container'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_for_college/screens/bottomnavigation_screen.dart';
+import 'package:flutter_for_college/screens/myscatck_layout.dart';
 import 'listview_screen.dart';
 import 'gridview_screen.dart';
 import 'cardview_screen.dart';
@@ -122,7 +124,51 @@ class DashboardScreen extends StatelessWidget {
                           );
                         },
                       ),
+                      //my stacklayout button
                       const SizedBox(height: 20),
+                      const SizedBox(height: 20),
+                      _buildDashboardCard(
+                        context,
+                        title: 'My Stack Layout',
+                        subtitle: 'Your custom Stack experiment',
+                        icon:
+                            Icons.stacked_bar_chart_rounded, // cool stack icon
+                        gradient: LinearGradient(
+                          colors: [Colors.teal.shade400, Colors.teal.shade700],
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const MyscatckLayout(), // Make sure this class name matches your file
+                            ),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      _buildDashboardCard(
+                        context,
+                        title: 'My Stack Layout',
+                        subtitle: 'Your custom Stack experiment',
+                        icon:
+                            Icons.stacked_bar_chart_rounded, // cool stack icon
+                        gradient: LinearGradient(
+                          colors: [
+                            const Color.fromARGB(255, 3, 37, 34),
+                            Colors.teal.shade700,
+                          ],
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ButtonNavigationScreen(), // Make sure this class name matches your file
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
